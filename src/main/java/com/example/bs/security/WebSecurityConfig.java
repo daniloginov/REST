@@ -1,6 +1,5 @@
 package com.example.bs.security;
 
-
 import com.example.bs.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

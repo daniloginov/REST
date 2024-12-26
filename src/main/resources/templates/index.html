@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+>
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+  <title>Spring Security Example</title>
 </head>
 <body>
-<div th:each="user : ${users}">
-  <a th:text="${user.toString()}">user</a>
-</div>
-<form th:action="@{/logout}" method="post">
-  <button type="submit">Sign Out</button>
-</form>
+<h1>Welcome to Index PAGE!</h1>
+
+<input onclick="window.location.href = '/logout'" type="button" value="Log out"/>
+
+
 </body>
 </html>

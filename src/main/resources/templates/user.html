@@ -1,85 +1,73 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
->
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
-  <title>User page</title>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Information</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+</head>
+<body>
 <header>
-  <nav class="navbar navbar-dark bg-dark">
-    <span class="navbar-brand mb-0 h1">
-         <span class="fw-bold " th:text="${user.username}"></span>
-            <span>with roles:</span>
-            <span th:each="role : ${user.authorities}"
-                  th:text="${#strings.substring(role.getAuthority(), 5)} + ' '">
-            </span>
-    </span>
-    <ul class="navbar-nav px-4">
+  <nav class="navbar navbar-dark bg-dark p-0 shadow">
+    <div class="nav-item text-left text-white px-3">
+      <span id="navbarUserEmail"></span>
+      <span>with roles:</span>
+      <span id="navbarUserRoles"></span>
+    </div>
+    <ul class="navbar-nav mr-3">
       <li class="nav-item text-nowrap">
-        <a class="nav-link" href="/logout">Logout</a>
+        <a class="nav-link px-3" href="/logout">Logout</a>
       </li>
     </ul>
   </nav>
 </header>
 
-<div class="container-fluid mt-3 ">
-
+<div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-md-2 px-0 ">
+    <div class="col-md-2 px-0">
       <div class="d-flex flex-column flex-shrink-0 p-0 text-white">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a aria-current="false" class="nav-link active no-refresh" data-bs-toggle="pill"
-               href="#userInfo"
-               role="tab">
+            <a href="#userInfo" data-bs-toggle="pill" class="nav-link active no-refresh" role="tab"
+               aria-current="false">
               User
             </a>
           </li>
         </ul>
       </div>
     </div>
-
     <div class="col-md-10 bg-light">
       <div class="tab-content">
         <div class="tab-pane fade show active" id="userInfo" role="tabpanel">
           <div class="container-fluid">
-            <h2>User information-page</h2>
+            <h2>User Information</h2>
             <div class="card">
               <div class="container-fluid px-0 bg-light border">
-                <h5 class="card-header">
-                  About user</h5>
+                <h5 class="card-header">About User</h5>
               </div>
-
-              <div class="container-fluid mt-4">
-                <div class="table-responsive">
-                  <table class="table table-striped bg-white">
-                    <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Username</th>
-                      <th>Email</th>
-                      <th>Role</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td th:text="${user.id}">Id</td>
-                      <td th:text="${user.username}">Name</td>
-                      <td th:text="${user.email}">Email</td>
-                      <td>
-                                                <span th:each="role : ${user.authorities}"
-                                                      th:text="${#strings.substring(role.getAuthority(), 5)} + ' '">
-                                                </span>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Age</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td id="userId"></td>
+                  <td id="firstName"></td>
+                  <td id="lastName"></td>
+                  <td id="age"></td>
+                  <td id="email"></td>
+                  <td id="roles"></td>
+                </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -87,16 +75,6 @@
     </div>
   </div>
 </div>
-
-<script crossorigin="anonymous"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/js/user.js"></script>
 </body>
-
 </html>

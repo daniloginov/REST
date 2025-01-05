@@ -38,7 +38,7 @@ function fetchUsers() {
         .then(response => {
             console.log('Users fetched:', response);
             const tableBody = document.getElementById('users-table-body');
-            tableBody.innerHTML = ''; // Очищаем существующие строки
+            tableBody.innerHTML = '';
             response.forEach(user => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -73,12 +73,12 @@ function loadRoles() {
             console.log('Roles fetched:', roles);
             const roleSelect = document.getElementById('roles');
             const editRoleSelect = document.getElementById('editRoles');
-            roleSelect.innerHTML = ''; // Очищаем существующие опции
+            roleSelect.innerHTML = '';
             editRoleSelect.innerHTML = '';
             roles.forEach(role => {
                 const option = document.createElement('option');
                 option.value = role.id;
-                option.text = role.authority; // Предполагается, что поле называется 'authority'
+                option.text = role.authority;
                 roleSelect.appendChild(option);
                 const editOption = document.createElement('option');
                 editOption.value = role.id;
@@ -168,7 +168,7 @@ document.getElementById('editUserForm').addEventListener('submit', function (eve
         id: parseInt(option.value, 10)
     }));
     const user = {
-        id: userId,
+        id: userId, // ID пользователя обязательно
         firstName: formData.get('editFirstName'),
         lastName: formData.get('editLastName'),
         age: parseInt(formData.get('editAge'), 10),
@@ -176,7 +176,7 @@ document.getElementById('editUserForm').addEventListener('submit', function (eve
         roles: rolesSelected
     };
     console.log('Updating user:', user);
-    fetch(`/admin/users/${userId}`, {
+    fetch(`/admin/users/${userId}`, { // Исправлен путь
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -185,7 +185,7 @@ document.getElementById('editUserForm').addEventListener('submit', function (eve
     })
         .then(response => {
             if (response.ok) {
-                fetchUsers();
+                fetchUsers(); // Перезагрузка таблицы
                 alert('Пользователь успешно обновлен!');
                 closeModal('editUserModal');
             } else {

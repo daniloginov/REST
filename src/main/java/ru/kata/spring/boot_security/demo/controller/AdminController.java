@@ -12,7 +12,6 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import java.security.Principal;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -51,6 +50,7 @@ public class AdminController {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
+        // Проверка ID
         if (user.getId() == null || !user.getId().equals(id)) {
             return ResponseEntity.badRequest().body(null);
         }

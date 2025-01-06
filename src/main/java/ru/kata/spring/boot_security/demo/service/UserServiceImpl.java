@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -24,10 +23,12 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional(readOnly = true)
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public User getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElse(null);

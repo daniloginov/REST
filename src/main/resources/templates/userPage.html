@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+          integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+          crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>User Page</title>
+</head>
+<body>
+<!-- Верхний нав. бар -->
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <div class="container-fluid bg-dark text-white">
+                <span class="navbar-brand mb-0 h1">
+                    <h4><span sec:authentication="name"></span> with roles <span
+                            th:each="authority : ${#authentication.getAuthorities()}"
+                            th:if="${authority.getAuthority().startsWith('ROLE_')}"
+                            th:text="${authority.getAuthority().replaceFirst('ROLE_', ' ')}">
+    </span></h4>
+                </span>
+  </div>
+
+  <!-- Logout button -->
+  <a th:href="@{/logout}"
+     class="btn btn-dark float-right">Logout</a>
+</nav>
+
+<!-- Left nav bar -->
+<div class="container-fluid">
+  <div class="row flex-nowrap h-100">
+    <div class="col-2 pt-2 bg-white h-100 d-inline-block">
+      <ul class="nav nav-fill flex-column align-items-left" id="menu">
+        <div sec:authorize="hasRole('ADMIN')">
+          <li class="nav-item">
+            <a href="/admin" class="nav-link align-middle px-0">
+              <button class="btn w-100 text-start" type="button">Admin</button>
+            </a>
+          </li>
+        </div>
+        <li>
+          <a href="/user" class="nav-link px-0 align-middle">
+            <button class="btn btn-primary w-100 text-start" type="button">User</button>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-10 py-3 bg-light h-100 d-inline-block">
+      <h1> User information-page </h1>
+
+      <!-- Tab panes -->
+      <div class="tab-content border">
+        <div class="tab-pane container active" id="users">
+          <div class="container">
+            <div class="row py-3">
+              <h3> About user </h3>
+            </div>
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Roles</th>
+              </tr>
+              </thead>
+              <tbody id="user-table-body">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="static/userPage.js"></script>
+</body>
+</html>
